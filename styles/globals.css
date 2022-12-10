@@ -1,3 +1,49 @@
 @tailwind base;
+
+.clip-pentagon {
+  clip-path: polygon(0% 0%, 0% 100%, 75% 100%, 100% 82%, 100% 0%);
+}
+.clip-pentagon-episode {
+  clip-path: polygon(0% 0%, 0% 100%, 90% 100%, 100% 60%, 100% 0%);
+}
+
 @tailwind components;
 @tailwind utilities;
+
+@font-face {
+  font-family: "TTTravels-thin";
+  src: url("../public/assets/fonts/TTTravels-Thin.ttf");
+  font-weight: 200;
+  font-style: normal;
+}
+@font-face {
+  font-family: "TTTravels-light";
+  src: url("../public/assets/fonts/TTTravels-Light.ttf");
+  font-weight: 300;
+  font-style: normal;
+}
+
+@font-face {
+  font-family: "TTTravels";
+  src: url("../public/assets/fonts/TTTravels-Regular.ttf");
+  font-weight: 400;
+  font-style: normal;
+}
+@font-face {
+  font-family: "TTTravels-bold";
+  src: url("../public/assets/fonts/TTTravels-Bold.ttf");
+  font-weight: 500;
+  font-style: normal;
+}
+@font-face {
+  font-family: "TTTravels-semibold";
+  src: url("../public/assets/fonts/TTTravels-DemiBold.ttf");
+  font-weight: 600;
+  font-style: normal;
+}
+@font-face {
+  font-family: "TTTravels-extrabold";
+  src: url("../public/assets/fonts/TTTravels-ExtraBold.ttf");
+  font-weight: 700;
+  font-style: normal;
+}
