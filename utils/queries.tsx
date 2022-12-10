@@ -20,3 +20,11 @@ export const fetchLocations = async () => {
   )
   return await result.json()
 }
+
+export const fetchAllCharacters = async (page: number) => {
+  const response = await fetch(
+    `https://rickandmortyapi.com/api/character/?page=${page}`
+  )
+
+  return await response.json()
+}

@@ -1,7 +1,7 @@
-import { Character } from "../../types"
-import CharacterCard from "../CharacterCard"
+import { Character } from "types"
+import CharacterCard from "@/components/CharacterCard"
 
-function CastsWrapper(props: { casts: Character[] }) {
+function CastsWrapper({ casts }: { casts: Character[] }) {
   return (
     <section className="flex flex-col space-y-8 justify-center px-12">
       <div className="flex justify-between">
@@ -11,8 +11,8 @@ function CastsWrapper(props: { casts: Character[] }) {
         <button>Search</button>
       </div>
 
-      <ul className="flex flex-wrap gap-8">
-        {props.casts.map((item) => {
+      <ul className="grid grid-cols-2 sm:grid-cols-4 gap-8">
+        {casts?.map((item) => {
           return <CharacterCard item={item} key={item.id} />
         })}
       </ul>
