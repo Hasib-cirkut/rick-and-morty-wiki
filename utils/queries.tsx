@@ -41,6 +41,22 @@ export const fetchAllCharacters = async (page: number) => {
   return await response.json()
 }
 
+export const fetchAllEpisodes = async (page: number) => {
+  const response = await fetch(
+    `https://rickandmortyapi.com/api/episode/?page=${page}`
+  )
+
+  return await response.json()
+}
+
+export const fetchAllLocations = async (page: number) => {
+  const response = await fetch(
+    `https://rickandmortyapi.com/api/location/?page=${page}`
+  )
+
+  return await response.json()
+}
+
 export async function resolveEpisodes(epis: string[]) {
   const episodeUrls = epis.slice(0, 5) ?? []
 

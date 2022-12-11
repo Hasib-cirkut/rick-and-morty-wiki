@@ -5,39 +5,59 @@ import type { NextPage } from "next"
 import Head from "next/head"
 import CastsWrapper from "@/components/CastsWrapper"
 import Pagination from "../components/Pagination"
-import { Character, Info } from "../types"
-import { fetchAllCharacters } from "utils/queries"
+import { Character, Episode, Info, Location } from "../types"
+import {
+  fetchAllCharacters,
+  fetchAllEpisodes,
+  fetchAllLocations,
+} from "utils/queries"
 import Link from "next/link"
+import Select from "react-select"
 
-export async function getStaticProps() {
-  const cast: Promise<Info<Character[]>> = await fetchAllCharacters(1)
+type TSelectOption = { value: string; label: string }
 
-  return {
-    props: {
-      fallback: {
-        "/fetchAllCharacters": cast,
-      },
-    },
-  }
-}
+const options: TSelectOption[] = [
+  { value: "character", label: "Character" },
+  { value: "episode", label: "Episode" },
+  { value: "location", label: "Location" },
+]
 
-const Cast: NextPage = () => {
+export default function Cast() {
   const [page, setPage] = React.useState(1)
-
-  const { data, mutate } = useSWR<Info<Character[]>>(
-    ["/fetchAllCharacters", page],
-    ([_, page]) => fetchAllCharacters(page)
-  )
+  const [category, setCategory] = React.useState("character")
+  const [totalPage, setTotalPage] = React.useState(1)
+  const [characters, setCharacters] = React.useState([] as Character[])
+  const [locations, setLocations] = React.useState([] as Location[])
+  const [episodes, setEpisodes] = React.useState([] as Episode[])
 
   React.useEffect(() => {
-    async function revalidate() {
-      await fetchAllCharacters(page)
+    async function getData() {
+      let response = {} as Info<Character[] | Episode[] | Location[]>
 
-      mutate({ ...data })
+      if (category === "character") {
+        response = await fetchAllCharacters(page)
+
+        setCharacters(() => response.results as Character[])
+        setTotalPage(() => response.info?.pages ?? 1)
+      } else if (category === "episode") {
+        response = await fetchAllEpisodes(page)
+
+        setEpisodes(() => response.results as Episode[])
+        setTotalPage(() => response.info?.pages ?? 1)
+      } else {
+        response = await fetchAllLocations(page)
+
+        setLocations(() => response.results as Location[])
+        setTotalPage(() => response.info?.pages ?? 1)
+      }
     }
 
-    revalidate()
-  }, [page])
+    getData()
+  }, [category, page])
+
+  function handleSelect(e: TSelectOption) {
+    setCategory(() => e.value)
+  }
 
   const handleSetPage = (type: "INC" | "DEC") => {
     if (type === "DEC" && page === 1) {
@@ -74,21 +94,26 @@ const Cast: NextPage = () => {
             />
           </Link>
 
-          <CastsWrapper casts={data?.results!} />
+          <div className="flex">
+            <Select
+              options={options}
+              onChange={handleSelect}
+              defaultValue={options[0]}
+            />
+            <input type="text" />
+          </div>
+
+          {category === "character" && <CastsWrapper casts={characters} />}
 
           <div className="flex justify-center my-8">
-            <Pagination page={page} setPage={handleSetPage} />
+            <Pagination
+              page={page}
+              setPage={handleSetPage}
+              totalPage={totalPage}
+            />
           </div>
         </div>
       </main>
     </div>
-  )
-}
-
-export default function Page({ fallback }: { fallback: Character[] }) {
-  return (
-    <SWRConfig value={{ fallback }}>
-      <Cast />
-    </SWRConfig>
   )
 }
