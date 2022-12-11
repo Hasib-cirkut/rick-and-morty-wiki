@@ -1,13 +1,13 @@
 import React from "react"
-import useSWR, { SWRConfig, useSWRConfig } from "swr"
+import useSWR, { SWRConfig } from "swr"
 
 import type { NextPage } from "next"
 import Head from "next/head"
 import CastsWrapper from "@/components/CastsWrapper"
 import Pagination from "../components/Pagination"
 import { Character, Info } from "../types"
-import Link from "next/link"
 import { fetchAllCharacters } from "utils/queries"
+import Link from "next/link"
 
 export async function getStaticProps() {
   const cast: Promise<Info<Character[]>> = await fetchAllCharacters(1)
@@ -54,12 +54,10 @@ const Cast: NextPage = () => {
 
   return (
     <div className="flex min-h-screen overflow-x-hidden overflow-y-hidden flex-col font-tttravels bg-primary relative">
-      <Link href={"/"}>
-        <img
-          src="/assets/images/background-casts.png"
-          className="absolute object-cover h-full top-0 pointer-events-none"
-        />
-      </Link>
+      <img
+        src="/assets/images/background-casts.png"
+        className="absolute object-cover h-full top-0 pointer-events-none"
+      />
 
       <Head>
         <title>Casts</title>
@@ -68,11 +66,13 @@ const Cast: NextPage = () => {
 
       <main className="flex w-screen flex-col justify-center text-center">
         <div className="flex flex-col items-center">
-          <img
-            src="/assets/images/logo.png"
-            alt="rick and morty logo"
-            className="object-contain w-40 h-16"
-          />
+          <Link href="/">
+            <img
+              src="/assets/images/logo.png"
+              alt="rick and morty logo"
+              className="object-contain w-40 h-16"
+            />
+          </Link>
 
           <CastsWrapper casts={data?.results!} />
 

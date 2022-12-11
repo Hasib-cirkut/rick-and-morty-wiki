@@ -7,17 +7,17 @@ import MeetTheCast from "@/components/MeetTheCast"
 import Locations from "@/components/Locations"
 
 import { Character, Episode, Location } from "types"
-import { fetchCast, fetchEpisodes, fetchLocations } from "utils/queries"
+import { fetchCasts, fetchEpisodes, fetchLocations } from "utils/queries"
 
 export async function getStaticProps() {
-  const cast: Promise<Character[]> = await fetchCast()
+  const cast: Promise<Character[]> = await fetchCasts()
   const episodes: Promise<Episode[]> = await fetchEpisodes()
   const locations: Promise<Location[]> = await fetchLocations()
 
   return {
     props: {
       fallback: {
-        "/fetchCast": cast,
+        "/fetchCasts": cast,
         "/fetchEpisodes": episodes,
         "/fetchLocations": locations,
       },
@@ -26,7 +26,7 @@ export async function getStaticProps() {
 }
 
 function Home() {
-  const { data: castList } = useSWR<Character[]>("/fetchCast", fetchCast)
+  const { data: castList } = useSWR<Character[]>("/fetchCasts", fetchCasts)
   const { data: episodeList } = useSWR<Episode[]>(
     "/fetchEpisodes",
     fetchEpisodes
