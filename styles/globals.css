@@ -15,8 +15,8 @@
   background-size: 100% 1px;
   background-position: 0 0, 0 100%;
   background-repeat: no-repeat;
-  backdrop-filter: blur(10px);
-  border-radius: 3px;
+  backdrop-filter: blur(1px);
+  border-radius: 5px;
 }
 
 @tailwind components;

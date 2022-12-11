@@ -4,7 +4,7 @@ import { Character } from "types"
 
 function MeetTheCast({ cast }: { cast: Character[] }) {
   return (
-    <section className="flex flex-col space-y-4 px-4 sm:px-16 mt-8">
+    <section className="flex flex-col space-y-4 px-4 md:px-16 mt-8">
       <div className="flex justify-between">
         <p className="text-white text-lg">Meet the Cast</p>
 
@@ -15,7 +15,7 @@ function MeetTheCast({ cast }: { cast: Character[] }) {
         </Link>
       </div>
 
-      <ul className="flex space-x-4 sm:space-x-8 overflow-x-auto">
+      <ul className="flex space-x-4 md:space-x-8 overflow-x-auto">
         {cast?.map((item) => {
           return <CharacterCard item={item} key={item.id} />
         })}

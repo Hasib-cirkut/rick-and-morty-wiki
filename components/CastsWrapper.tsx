@@ -11,7 +11,7 @@ function CastsWrapper({ casts }: { casts: Character[] }) {
         <button>Search</button>
       </div>
 
-      <ul className="grid grid-cols-2 sm:grid-cols-4 gap-8">
+      <ul className="grid grid-cols-2 md:grid-cols-4 gap-8">
         {casts?.map((item) => {
           return <CharacterCard item={item} key={item.id} />
         })}
