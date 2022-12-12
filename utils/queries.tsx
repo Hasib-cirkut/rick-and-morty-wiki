@@ -33,25 +33,25 @@ export const fetchLocations = async () => {
   return await result.json()
 }
 
-export const fetchAllCharacters = async (page: number) => {
+export const fetchAllCharacters = async (page: number, query = "") => {
   const response = await fetch(
-    `https://rickandmortyapi.com/api/character/?page=${page}`
+    `https://rickandmortyapi.com/api/character/?page=${page}&name=${query}`
   )
 
   return await response.json()
 }
 
-export const fetchAllEpisodes = async (page: number) => {
+export const fetchAllEpisodes = async (page: number, query = "") => {
   const response = await fetch(
-    `https://rickandmortyapi.com/api/episode/?page=${page}`
+    `https://rickandmortyapi.com/api/episode/?page=${page}&name=${query}`
   )
 
   return await response.json()
 }
 
-export const fetchAllLocations = async (page: number) => {
+export const fetchAllLocations = async (page: number, query = "") => {
   const response = await fetch(
-    `https://rickandmortyapi.com/api/location/?page=${page}`
+    `https://rickandmortyapi.com/api/location/?page=${page}&name=${query}`
   )
 
   return await response.json()
@@ -67,4 +67,13 @@ export async function resolveEpisodes(epis: string[]) {
   const response = await Promise.all([...promises])
 
   return response
+}
+export async function getData(type: string, query: string, page: number) {
+  if (type === "character") {
+    return await fetchAllCharacters(page, query)
+  } else if (type === "episode") {
+    return await fetchAllEpisodes(page, query)
+  } else {
+    return await fetchAllLocations(page, query)
+  }
 }

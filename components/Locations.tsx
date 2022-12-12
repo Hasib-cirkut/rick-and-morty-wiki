@@ -1,24 +1,37 @@
 import { Location } from "types"
+import LocationCard from "@/components/LocationCard"
+import React from "react"
+import { ScrollRight as ScrollIcon } from "./Icons"
 
 function Locations({ locations }: { locations: Location[] }) {
+  const scrollable = React.useRef(null)
+
+  function scroll(scrollOffset: number) {
+    if (scrollable.current) {
+      ;(scrollable.current as HTMLElement).scrollLeft += scrollOffset
+    }
+  }
+
   return (
-    <section className="flex flex-col space-y-4 px-4 md:px-16 mt-8">
+    <section className="flex flex-col space-y-4 px-8 md:px-16 mt-8 relative">
       <p className="text-white text-left">Locations</p>
 
-      <ul className="flex space-x-4 md:space-x-8 overflow-x-auto">
+      <ScrollIcon
+        className="absolute h-10 w-10 top-1/2 translate-y-[-25px] md:translate-y-[-15px] left-0 md:left-10 rotate-180 z-10 cursor-pointer"
+        onClick={() => scroll(-60)}
+      />
+
+      <ScrollIcon
+        className="absolute h-10 w-10 top-1/2 translate-y-[-25px] md:translate-y-[-10px] right-0 md:right-8 z-10 cursor-pointer"
+        onClick={() => scroll(60)}
+      />
+
+      <ul
+        className="flex space-x-4 md:space-x-8 overflow-x-auto scrollbar-hide"
+        ref={scrollable}
+      >
         {locations.map((item) => {
-          return (
-            <li className="min-w-[10rem] md:min-w-[17rem]" key={item.id}>
-              <div className="p-[2px] bg-gradient-to-t rounded-sm from-secondary/10 to-accent/10 clip-pentagon-episode shrink-0">
-                <div className="flex flex-col items-start justify-between bg-primary/60 clip-pentagon-episode px-4 py-2 ">
-                  <p className="text-white font-tttravels text-[10px] md:text-base">
-                    # {item.id}
-                  </p>
-                  <p className="text-white text-[14px]">{item.name}</p>
-                </div>
-              </div>
-            </li>
-          )
+          return <LocationCard item={item} />
         })}
       </ul>
     </section>

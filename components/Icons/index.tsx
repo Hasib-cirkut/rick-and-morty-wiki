@@ -262,3 +262,31 @@ export function Next(props: JSX.IntrinsicAttributes & SVGProps<SVGSVGElement>) {
     </svg>
   )
 }
+
+export function ScrollRight(
+  props: JSX.IntrinsicAttributes & SVGProps<SVGSVGElement>
+) {
+  return (
+    <svg
+      width={50}
+      height={50}
+      viewBox="0 0 50 50"
+      fill="none"
+      xmlns="http://www.w3.org/2000/svg"
+      {...props}
+    >
+      <circle cx={25} cy={25} r={25} fill="#fff" />
+      <g clipPath="url(#clip0_101_214)">
+        <path
+          d="M26.267 25.485l-6.6 6.6 1.885 1.886 8.485-8.486L21.552 17l-1.885 1.885 6.6 6.6z"
+          fill="#9DFE00"
+        />
+      </g>
+      <defs>
+        <clipPath id="clip0_101_214">
+          <path fill="#fff" transform="matrix(0 1 1 0 9 9)" d="M0 0H32V32H0z" />
+        </clipPath>
+      </defs>
+    </svg>
+  )
+}
