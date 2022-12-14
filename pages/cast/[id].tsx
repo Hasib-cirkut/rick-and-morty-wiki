@@ -16,6 +16,11 @@ import {
   Location,
 } from "@/components/Icons"
 import Link from "next/link"
+import Image from "next/image"
+
+import backgroundCastImage from "public/assets/images/background-cast.png"
+import backgroundCastSMImage from "public/assets/images/background-cast-sm.png"
+import logoImage from "public/assets/images/logo.png"
 
 const Cast: NextPage = () => {
   const { query, isReady } = useRouter()
@@ -47,14 +52,16 @@ const Cast: NextPage = () => {
 
   return (
     <div className="flex min-h-screen overflow-x-hidden overflow-y-hidden flex-col bg-primary relative">
-      <img
-        src="/assets/images/background-cast.png"
+      <Image
+        src={backgroundCastImage}
         className="hidden md:block absolute object-cover h-full w-full top-0 pointer-events-none"
+        alt="background image"
       />
 
-      <img
-        src="/assets/images/background-cast-sm.png"
+      <Image
+        src={backgroundCastSMImage}
         className="block md:hidden absolute object-fill  w-full top-0 pointer-events-none"
+        alt="background image"
       />
 
       <Head>
@@ -64,10 +71,10 @@ const Cast: NextPage = () => {
 
       <main className="flex w-screen flex-col justify-center items-center text-center mb-6 md:space-y-16">
         <Link href="/">
-          <img
-            src="/assets/images/logo.png"
-            alt="rick and morty logo"
+          <Image
+            src={logoImage}
             className="object-contain w-40 h-16"
+            alt="rick and morty logo"
           />
         </Link>
 

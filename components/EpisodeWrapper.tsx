@@ -7,7 +7,7 @@ function CastsWrapper({ episodes }: { episodes: Episode[] }) {
     <section className="flex justify-center px-4 sm:px-12">
       <ul className="grid grid-cols-2 md:grid-cols-4 gap-2 sm:gap-8">
         {episodes.map((item) => {
-          return <EpisodeCard item={item} />
+          return <EpisodeCard item={item} key={item.id} />
         })}
       </ul>
     </section>

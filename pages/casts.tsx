@@ -11,6 +11,9 @@ import LocationWrapper from "@/components/LocationWrapper"
 
 import debounce from "lodash/debounce"
 
+import backgroundCasts from "public/assets/images/background-casts.png"
+import Image from "next/image"
+
 type TSelectOption = { value: string; label: string }
 
 const options: TSelectOption[] = [
@@ -149,8 +152,9 @@ export default function Cast() {
 
   return (
     <div className="flex min-h-screen overflow-x-hidden overflow-y-hidden flex-col font-tttravels bg-primary relative">
-      <img
-        src="/assets/images/background-casts.png"
+      <Image
+        src={backgroundCasts}
+        alt="Background image"
         className="absolute object-cover h-full w-full top-0 pointer-events-none"
       />
 

@@ -31,7 +31,7 @@ function Locations({ locations }: { locations: Location[] }) {
         ref={scrollable}
       >
         {locations.map((item) => {
-          return <LocationCard item={item} />
+          return <LocationCard item={item} key={item.id} />
         })}
       </ul>
     </section>

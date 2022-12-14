@@ -1,4 +1,5 @@
 import Head from "next/head"
+import Image from "next/image"
 import useSWR, { SWRConfig } from "swr"
 
 import Episodes from "@/components/Episodes"
@@ -8,6 +9,9 @@ import Locations from "@/components/Locations"
 
 import { Character, Episode, Location } from "types"
 import { fetchCasts, fetchEpisodes, fetchLocations } from "utils/queries"
+
+import backgroundImage from "public/assets/images/background.png"
+import logo from "public/assets/images/logo.png"
 
 export async function getStaticProps() {
   const cast: Promise<Character[]> = await fetchCasts()
@@ -38,9 +42,10 @@ function Home() {
 
   return (
     <div className="flex min-h-screen overflow-x-hidden flex-col font-tttravels bg-primary relative">
-      <img
-        src="/assets/images/background.png"
+      <Image
         className="absolute object-cover h-full top-0 pointer-events-none"
+        src={backgroundImage}
+        alt="Background image"
       />
 
       <Head>
@@ -50,10 +55,10 @@ function Home() {
 
       <main className="flex w-screen flex-col justify-center text-center my-8">
         <div className="flex flex-col items-center">
-          <img
-            src="/assets/images/logo.png"
-            alt="rick and morty logo"
+          <Image
             className="object-contain w-32 h-16"
+            src={logo}
+            alt="rick and morty logo"
           />
 
           <Hero />
