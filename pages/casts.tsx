@@ -66,7 +66,7 @@ export default function Cast() {
     resolveData()
   }, [category, page])
 
-  function handleSelect(e: TSelectOption) {
+  function handleSelect(e: any) {
     setCategory(() => e.value)
   }
 
